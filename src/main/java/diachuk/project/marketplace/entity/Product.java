@@ -2,10 +2,14 @@ package diachuk.project.marketplace.entity;
 
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import lombok.Data;
 
@@ -21,4 +25,7 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Cart> carts;
+
 }
