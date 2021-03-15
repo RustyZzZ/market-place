@@ -35,7 +35,7 @@ public class V1CategoryController {
 	public List<Category> getAll(@RequestParam(required = false, defaultValue = "10") Integer size,
 			@RequestParam(required = false, defaultValue = "1") Integer page
 	) {
-		return null;
+		return service.getAll();
 	}
 
 	@ApiOperation( value = "Get by id", notes = "This method get by id")
