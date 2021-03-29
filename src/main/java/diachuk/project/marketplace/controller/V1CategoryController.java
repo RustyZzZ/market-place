@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,7 @@ public class V1CategoryController {
 
 
 	@GetMapping()
+	@PreAuthorize("hasRole('ROLE_USER')")
 	public List<Category> getAll(@RequestParam(required = false, defaultValue = "10") Integer size,
 			@RequestParam(required = false, defaultValue = "1") Integer page
 	) {
