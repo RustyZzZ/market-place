@@ -33,7 +33,7 @@ public class V1CategoryController {
 
 
 	@GetMapping()
-	@PreAuthorize("hasRole('ROLE_USER')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public List<Category> getAll(@RequestParam(required = false, defaultValue = "10") Integer size,
 			@RequestParam(required = false, defaultValue = "1") Integer page
 	) {

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -21,17 +22,24 @@ public class SecurityController {
 		var adminRequest = new UserRequest();
 		adminRequest.setUsername("admin");
 		adminRequest.setPassword("admin");
-		service.createUser(adminRequest, Role.ERole.ROLE_ADMIN);
+		service.createUser(adminRequest, "ROLE_ADMIN");
 	}
 
 
 	@PostMapping("/createUser")
 	@PreAuthorize("isAnonymous()")
-	public ResponseEntity<User> registerUser(UserRequest userDto){
-		return  ResponseEntity.ok(service.createUser(userDto, Role.ERole.ROLE_USER));
+	public ResponseEntity<User> registerUser(@RequestBody UserRequest userDto){
+		return  ResponseEntity.ok(service.createUser(userDto, "ROLE_USER"));
 	}
 	@PostMapping("/createAdmin")
-	public ResponseEntity<User> registerAdmin(UserRequest userDto){
-		return  ResponseEntity.ok(service.createUser(userDto, Role.ERole.ROLE_ADMIN));
+	public ResponseEntity<User> registerAdmin(@RequestBody UserRequest userDto){
+		return  ResponseEntity.ok(service.createUser(userDto, "ROLE_ADMIN"));
 	}
+	@PostMapping("/login")
+	@PreAuthorize("isAnonymous()")
+	public ResponseEntity<String> login(@RequestBody UserRequest userRequest){
+		return ResponseEntity.ok(service.createToken(userRequest));
+	}
+
+
 }
