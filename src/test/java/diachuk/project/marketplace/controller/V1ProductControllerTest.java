@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-class V1CategoryControllerTest {
+class V1ProductControllerTest {
 	@MockBean
 	CategoryRepository categoryRepository;
 

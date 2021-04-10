@@ -2,6 +2,7 @@ package diachuk.project.marketplace.entity;
 
 
 import java.math.BigDecimal;
+import java.util.Currency;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -22,6 +23,7 @@ public class Product {
 	private String name;
 
 	private BigDecimal price;
+	private Currency currency;
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
