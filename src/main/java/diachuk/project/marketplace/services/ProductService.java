@@ -17,19 +17,19 @@ public class ProductService {
 		product.setCurrency(Currency.getInstance("UAH"));
 		product.setPrice(BigDecimal.valueOf(191));
 
-		createProduct(product);
+		//createProduct(product);
 	}
 
 
 	private final CurrencyService currencyService;
 
-	public Product createProduct(Product product) {
-
-		var currencyCode = product.getCurrency().getCurrencyCode();
-		var rate = currencyService.getCurrency().getRates().get(currencyCode);
-		product.setPrice(product.getPrice().divide(rate, RoundingMode.HALF_UP));
-		product.setCurrency(Currency.getInstance("EUR"));
-		return product;
-	}
+//	public Product createProduct(Product product) {
+//
+//		var currencyCode = product.getCurrency().getCurrencyCode();
+//		var rate = currencyService.getCurrency().getRates().get(currencyCode);
+//		product.setPrice(product.getPrice().divide(rate, RoundingMode.HALF_UP));
+//		product.setCurrency(Currency.getInstance("EUR"));
+//		return product;
+//	}
 
 }
