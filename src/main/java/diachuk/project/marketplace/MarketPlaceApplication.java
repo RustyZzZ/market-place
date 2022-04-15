@@ -19,7 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableFeignClients
 @EnableCaching
-public class MarketPlaceApplication implements CommandLineRunner {
+public class MarketPlaceApplication /*implements CommandLineRunner */{
 
 	@Autowired
 	private CurrencyService currencyService;
@@ -30,32 +30,32 @@ public class MarketPlaceApplication implements CommandLineRunner {
 		SpringApplication.run(MarketPlaceApplication.class, args);
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-		currencyService.getCurrency();
-
-	}
+//	@Override
+//	public void run(String... args) throws Exception {
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//		currencyService.getCurrency();
+//
+//	}
 }

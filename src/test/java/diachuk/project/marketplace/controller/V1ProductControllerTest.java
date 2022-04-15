@@ -40,7 +40,6 @@ class V1ProductControllerTest {
 
 
 	@Test
-
 	void name() throws Exception {
 		var category = Category.builder().name("name").description("desc").id(1L).build();
 		var list = new ArrayList<Category>();

@@ -7,10 +7,13 @@ import diachuk.project.marketplace.stubs.CategoryStub;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -27,10 +30,13 @@ import static org.mockito.Mockito.when;
 @ExtendWith({MockitoExtension.class})
 class CategoryServiceTest {
 	private CategoryService service;
+
 	@Mock
 	private CategoryRepository categoryRepository;
 	@Mock
 	private CategoryMapper categoryMapper;
+	@Captor
+	private ArgumentCaptor<Long> captor;
 
 	@BeforeEach
 	void setup() {
@@ -41,9 +47,7 @@ class CategoryServiceTest {
 	void testSuccessfulGetById() {
 		var category = CategoryStub.getRandomCategory();
 		when(categoryRepository.findById(any())).thenReturn(Optional.of(category));
-
 		var result = service.getById(ID);
-
 		assertAll(
 				() -> assertEquals(result.getId(), category.getId()),
 				() -> assertEquals(result.getName(), category.getName()),
@@ -54,18 +58,22 @@ class CategoryServiceTest {
 	@Test
 	void testNotSuccessfulGetById(){
 		when(categoryRepository.findById(any())).thenReturn(Optional.empty());
-		var e = assertThrows(NoSuchElementException.class, () -> service.getById(ID));
+		var e =
+				assertThrows(NoSuchElementException.class, () -> service.getById(ID));
 		assertEquals(e.getMessage(),"No value present");
 	}
 
 
 	@Test
 	void testSuccessfulSave() {
+		//given
 		var captor = ArgumentCaptor.forClass(Category.class);
 		var category = getRandomCategory();
 		when(categoryMapper.fromRequest(any())).thenReturn(category);
 		when(categoryRepository.save(any())).thenReturn(getRandomCategory());
+		//when
 		var result = service.create(getCategoryRequest());
+		//then
 		Mockito.verify(categoryRepository, atLeast(1)).save(captor.capture());
 		assertEquals(category, captor.getValue());
 		assertEquals(category.getName(), result.getName());

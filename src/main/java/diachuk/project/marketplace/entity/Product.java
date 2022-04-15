@@ -24,7 +24,7 @@ public class Product {
 
 	private BigDecimal price;
 	private Currency currency;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id")
 	private Category category;
 	@ManyToMany(fetch = FetchType.EAGER)

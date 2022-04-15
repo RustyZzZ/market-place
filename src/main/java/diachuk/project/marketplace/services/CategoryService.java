@@ -18,7 +18,6 @@ public class CategoryService {
 
 	public Category getById(Long id) {
 		return repo.findById(id).orElseThrow();
-
 	}
 
 	public Category create(CategoryRequest request) {
@@ -30,7 +29,7 @@ public class CategoryService {
 
 
 	public void delete(Long id){
-		//repo.deleteById(id);
+		repo.deleteById(id);
 	}
 
 	public List<Category> getAll(){

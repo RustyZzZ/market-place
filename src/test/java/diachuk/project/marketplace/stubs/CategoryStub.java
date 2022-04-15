@@ -8,7 +8,8 @@ public final class CategoryStub {
 	public static final Long ID = 1L;
 	public static final String NAME = "NAME";
 	public static final String DESCRIPTION = "DESCRIPTION";
-	public static Category getRandomCategory(){
+
+	public static Category getRandomCategory() {
 		return Category.builder()
 					   .id(ID)
 					   .name(NAME)
@@ -17,7 +18,7 @@ public final class CategoryStub {
 					   .build();
 	}
 
-	public static CategoryRequest getCategoryRequest(){
+	public static CategoryRequest getCategoryRequest() {
 		var categoryRequest = new CategoryRequest();
 		categoryRequest.setName(NAME);
 		categoryRequest.setDescription(DESCRIPTION);

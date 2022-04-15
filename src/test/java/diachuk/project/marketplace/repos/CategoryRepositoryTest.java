@@ -15,18 +15,24 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(SpringExtension.class)
-@DataJpaTest
+@SpringBootTest
+@Testcontainers
 class CategoryRepositoryTest {
 	public static final String DESCRIPTION = "Desc";
 	@Autowired
-	private  CategoryRepository categoryRepository;
-
-	@Autowired
-	private TestEntityManager entityManager;
+	private CategoryRepository categoryRepository;
+	@Container
+	public static PostgreSQLContainer<?> postgreDBContainer = new PostgreSQLContainer<>("postgres:9.4")
+			.withDatabaseName("marketplace")
+			.withUsername("postgres")
+			.withPassword("postgres")
+			.withExposedPorts(5432);
 
 
 
@@ -34,12 +40,11 @@ class CategoryRepositoryTest {
 	void testFindCategoryByDescription() {
 
 		var expectedCategory = Category.builder()
-								   .name("MyBestCategory")
-								   .id(1L)
-								   .description(DESCRIPTION)
-								   .build();
-		entityManager.persist(expectedCategory);
-		entityManager.flush();
+									   .name("MyBestCategory")
+									   .id(1L)
+									   .description(DESCRIPTION)
+									   .build();
+		categoryRepository.save(expectedCategory);
 		var actualCategory = categoryRepository.findCategoryByDescription(DESCRIPTION);
 
 		Assertions.assertThat(actualCategory.get()).isEqualTo(expectedCategory);
@@ -52,8 +57,7 @@ class CategoryRepositoryTest {
 									   .id(1L)
 									   .description(DESCRIPTION)
 									   .build();
-		entityManager.persist(expectedCategory);
-		entityManager.flush();
+		categoryRepository.save(expectedCategory);
 
 		var actualCategory = categoryRepository
 				.findCategoryByDescription(DESCRIPTION+"s");
